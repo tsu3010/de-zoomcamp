@@ -87,3 +87,7 @@ LIMIT 1;
 Answer: Yorkville West
 
 ## Question 7. Terraform Workflow
+
+Terraform Workflow sequence: 
+
+Answer: terraform init, terraform apply -auto-approve, terraform destroy
