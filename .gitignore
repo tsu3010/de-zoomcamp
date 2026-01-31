@@ -1,4 +1,8 @@
 *.parquet
+*.csv
+google-cloud-cli-linux-*
+google-cloud-sdk/
+*.json 
 
 
 # Byte-compiled / optimized / DLL files
