@@ -3,6 +3,8 @@
 google-cloud-cli-linux-*
 google-cloud-sdk/
 *.json 
+.env_encoded
+.env 
 
 
 # Byte-compiled / optimized / DLL files
