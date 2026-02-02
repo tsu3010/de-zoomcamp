@@ -3,12 +3,10 @@
 
 ## Question 1: Uncompressed File Size
 
-Answer: 128.3 MiBLogic: I ran the Yellow Taxi flow for 2020-12. After the extract task completed, I checked the Outputs tab in Kestra. The size attribute for the uncompressed .csv file recorded 134.5 MB, which converts to approximately $128.3$ MiB.
+Answer: 128.3 MiBLogic: I ran the Yellow Taxi flow for 2020-12. After the extract task completed, I checked the Outputs tab in Kestra. The size attribute for the uncompressed .csv file recorded is ~128.3MiB 
 
 ## Question 2: Rendered Value of file Variable
-Answer: {{inputs.taxi}}_tripdata_{{inputs.year}}-{{inputs.month}}.csv
-
-Logic: In Kestra, variables defined in the inputs section are accessed using the double curly-brace syntax. To construct the filename dynamically, we concatenate the taxi type, year, and month strings.
+Answer: Rendered value with given inputs is green_tripdata_2020-04.csv
 
 ## Question 3: Yellow Taxi 2020 Row Count
 Answer: 24,648,499
@@ -34,7 +32,6 @@ Logic: I executed the flow manually with inputs taxi: yellow, year: 2021, and mo
 ## Question 6: Schedule Trigger Timezone
 Answer: Add a timezone property set to America/New_York
 
-Logic: To ensure the flow runs according to the local time in New York (where the data originates), the timezone property must be explicitly defined within the Schedule trigger block in the YAML configuration.
 
 
 
