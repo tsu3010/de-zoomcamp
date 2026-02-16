@@ -24,13 +24,7 @@ I followed the dbt best practices for a modular data pipeline:
 
 ### Question 1: dbt Lineage and Execution
 **Question:** `dbt run --select int_trips_unioned` builds which models?
-* **Answer:** `int_trips_unioned` only 
-* **Reasoning:** 
-Explanation: In dbt, the command dbt run --select model_name runs only that specific model.
-
-If you wanted to include upstream dependencies (parents), you would use +int_trips_unioned.
-
-If you wanted to include downstream dependencies (children), you would use int_trips_unioned+.
+* **Answer:** `stg_green_tripdata, stg_yellow_tripdata, and int_trips_unioned` only 
 
 ### Question 2: dbt Tests
 **Question:** If a value `6` appears in `payment_type` (which expects 1-5), what happens during `dbt test`?
@@ -66,7 +60,7 @@ If you wanted to include downstream dependencies (children), you would use int_t
 
 ### Question 6: FHV Staging Model
 **Question:** What is the count of records in `stg_fhv_tripdata` after filtering out NULL `dispatching_base_num`?
-* **Answer:** **43,244,693**
+* **Answer:** **22998722**
 
 ---
 
