@@ -23,9 +23,14 @@ I followed the dbt best practices for a modular data pipeline:
 ## 📝 Homework Solutions
 
 ### Question 1: dbt Lineage and Execution
-**Question:** `dbt run --select int_trips_unioned+` builds which models?
-* **Answer:** `stg_green_tripdata`, `stg_yellow_tripdata`, and `int_trips_unioned`.
-* **Reasoning:** The `+` suffix selects the model and all of its **upstream** dependencies.
+**Question:** `dbt run --select int_trips_unioned` builds which models?
+* **Answer:** `int_trips_unioned` only 
+* **Reasoning:** 
+Explanation: In dbt, the command dbt run --select model_name runs only that specific model.
+
+If you wanted to include upstream dependencies (parents), you would use +int_trips_unioned.
+
+If you wanted to include downstream dependencies (children), you would use int_trips_unioned+.
 
 ### Question 2: dbt Tests
 **Question:** If a value `6` appears in `payment_type` (which expects 1-5), what happens during `dbt test`?
