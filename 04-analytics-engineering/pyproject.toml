@@ -1,0 +1,10 @@
+[project]
+name = "04-analytics-engineering"
+version = "0.1.0"
+description = "Upload NYC Taxi data to GCS for analytics engineering"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "google-cloud-storage>=2.10.0",
+    "requests>=2.31.0",
+]
