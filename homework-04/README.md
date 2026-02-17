@@ -80,24 +80,5 @@ AND EXTRACT(month FROM pickup_datetime) = 10;
 
 ---
 
-## 🚀 How to Run
-To replicate these results:
-
-1.  **Install dependencies:**
-    ```bash
-    dbt deps
-    ```
-2.  **Seed the Taxi Zones lookup table:**
-    ```bash
-    dbt seed
-    ```
-3.  **Run the models (Production Mode):**
-    ```bash
-    dbt run --target prod --var 'is_test_run: false'
-    ```
-4.  **Execute tests:**
-    ```bash
-    dbt test
-    ```
 
 ---
