@@ -24,7 +24,12 @@ I followed the dbt best practices for a modular data pipeline:
 
 ### Question 1: dbt Lineage and Execution
 **Question:** `dbt run --select int_trips_unioned` builds which models?
-* **Answer:** `stg_green_tripdata, stg_yellow_tripdata, and int_trips_unioned` only 
+* **Answer:** 
+When you run `dbt run --select int_trips_unioned`:
+
+dbt builds only int_trips_unioned
+It assumes stg_green_tripdata and stg_yellow_tripdata already exist in your warehouse
+If they don't exist (or are stale), the run will fail with a "relation does not exist" error
 
 ### Question 2: dbt Tests
 **Question:** If a value `6` appears in `payment_type` (which expects 1-5), what happens during `dbt test`?
@@ -44,11 +49,12 @@ I followed the dbt best practices for a modular data pipeline:
 * **Answer:** **East Harlem North**
 * **Validation Query:**
     ```sql
+    
     SELECT 
         pickup_zone, 
-        SUM(revenue_monthly_total_amount) as total_rev
-    FROM `dtc-de-course-486009.dbt_sthyagaraj.fct_monthly_zone_revenue`
-    WHERE taxi_type = 'Green' AND year = 2020
+        SUM(total_amount) as total_rev
+    FROM `dtc-de-course-486009.dbt_sthyagaraj.fct_trips`
+    WHERE service_type = 'Green' AND EXTRACT(year FROM pickup_datetime) = 2020
     GROUP BY 1
     ORDER BY 2 DESC
     LIMIT 1;
@@ -57,6 +63,16 @@ I followed the dbt best practices for a modular data pipeline:
 ### Question 5: Green Taxi Trip Counts (October 2019)
 **Question:** What is the total number of trips for Green taxis in October 2019?
 * **Answer:** **384,624**
+* **Validation Query:**
+```sql
+
+SELECT 
+    COUNT(DISTINCT trip_id) AS trips
+FROM `dtc-de-course-486009.dbt_sthyagaraj.fct_trips`
+WHERE service_type = 'Green' 
+AND EXTRACT(year FROM pickup_datetime) = 2019
+AND EXTRACT(month FROM pickup_datetime) = 10;
+```
 
 ### Question 6: FHV Staging Model
 **Question:** What is the count of records in `stg_fhv_tripdata` after filtering out NULL `dispatching_base_num`?
