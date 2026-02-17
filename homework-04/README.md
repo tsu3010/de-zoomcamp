@@ -78,7 +78,7 @@ AND EXTRACT(month FROM pickup_datetime) = 10;
 **Question:** What is the count of records in `stg_fhv_tripdata` after filtering out NULL `dispatching_base_num`?
 * **Answer:** **43,244,693**
 
-# FHV Staging Model - Solution Summary
+#### FHV Staging Model - Solution Summary
 
 ## 1. Upload Data to GCS
 ```bash
