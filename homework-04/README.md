@@ -76,8 +76,39 @@ AND EXTRACT(month FROM pickup_datetime) = 10;
 
 ### Question 6: FHV Staging Model
 **Question:** What is the count of records in `stg_fhv_tripdata` after filtering out NULL `dispatching_base_num`?
-* **Answer:** **22998722**
+* **Answer:** **43,244,693**
 
+# FHV Staging Model - Solution Summary
+
+## 1. Upload Data to GCS
+```bash
+uv run upload_fhv_to_gcs.py
+```
+
+## 2. Create BigQuery Tables
+```sql
+-- External table
+CREATE OR REPLACE EXTERNAL TABLE `dtc-de-course-486009.nytaxi.external_fhv_tripdata`
+OPTIONS (format = 'CSV', uris = ['gs://dtc-decourse-dbt-nytaxi/fhv_tripdata_2019-*.csv']);
+
+-- Native table
+CREATE OR REPLACE TABLE `dtc-de-course-486009.nytaxi.fhv_tripdata`
+AS SELECT * FROM `dtc-de-course-486009.nytaxi.external_fhv_tripdata`;
+```
+
+## 3. dbt Files
+
+**sources.yml** - Added `fhv_tripdata` table to existing `raw_data` source
+
+**stg_fhv_tripdata.sql** - Filters `dispatching_base_num IS NOT NULL`, renames columns (e.g., `PUlocationID` → `pickup_location_id`)
+
+## 4. Run & Count
+```bash
+dbt build --select stg_fhv_tripdata
+```
+```sql
+SELECT COUNT(*) FROM `dtc-de-course-486009.dbt_nytaxi.stg_fhv_tripdata`;
+```
 ---
 
 
