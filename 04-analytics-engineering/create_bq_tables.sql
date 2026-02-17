@@ -39,7 +39,7 @@ OPTIONS (
 );
 
 -- Create native partitioned table for green taxi
-CREATE OR REPLACE TABLE `dtc-de-course-486009.nytaxi.greentrip_data`
+CREATE OR REPLACE TABLE `dtc-de-course-486009.nytaxi.green_tripdata`
 PARTITION BY DATE(lpep_pickup_datetime)
 AS
 SELECT
@@ -110,7 +110,7 @@ OPTIONS (
 );
 
 -- Create native partitioned table for yellow taxi
-CREATE OR REPLACE TABLE `dtc-de-course-486009.nytaxi.yellowtrip_data`
+CREATE OR REPLACE TABLE `dtc-de-course-486009.nytaxi.yellow_tripdata`
 PARTITION BY DATE(tpep_pickup_datetime)
 AS
 SELECT
@@ -144,6 +144,13 @@ SELECT
     congestion_surcharge
 FROM `dtc-de-course-486009.nytaxi.yellow_tripdata_external`
 WHERE tpep_pickup_datetime IS NOT NULL;
+
+
+CREATE OR REPLACE EXTERNAL TABLE `dtc-de-course-486009.nytaxi.fhv_tripdata`
+OPTIONS (
+  format = 'CSV',
+  uris = ['gs://dtc-decourse-dbt-nytaxi/fhv_tripdata_2019-*.csv']
+);
 
 
 -- ============================================================================
