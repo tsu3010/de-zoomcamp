@@ -32,7 +32,7 @@ I followed the dbt best practices for a modular data pipeline:
 
 ### Question 3: Counting Records in `fct_monthly_zone_revenue`
 **Question:** What is the count of records in the `fct_monthly_zone_revenue` model?
-* **Answer:** **12,998**
+* **Answer:** **12,184**
 * **Validation Query:**
     ```sql
     SELECT count(1) 
